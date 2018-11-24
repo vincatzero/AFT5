@@ -129,24 +129,28 @@ Chromosome Chromosome::CreateChromosome()
 	return newChromosome;
 };
 
-/*
-
 void Chromosome::OutputToFile(ofstream &ofs)
 {
 	Gene newGene;
-	//ofs << GetGeneName() + ",";
-	ofs.close();
+	//ofs.close();
 
 	for (vector<vector<Allele>>::size_type i = 0; i < genes.size(); i++)
 
 	{
+		ofs << GetGeneName(i) + "," << GetGeneTrait(i) + ",";
+		int counter = 0;
+
 		for (vector<Allele>::size_type j = 0; j < this->genes[i].size(); j++)
 
 		{
-			cout << GetGeneName(i) + "," << GetGeneTrait(i) + "," << genes[i][j].GetVariant() + "," << genes[i][j].GetType(i) + ","; //genes[i][j].GetSequence(i) + "\n";
-
+			ofs << genes[i][j].GetVariant() + "," << genes[i][j].GetType(i) + "," << genes[i][j].GetSequence(i);
+			if (counter == 0)
+			{
+				ofs << ",";
+				counter++;
+			}
 			//ofs << GetGeneName(i) + "," << GetGeneTrait(i) + "," << genes[i][j].GetVariant();
 		}
+		ofs << endl;
 	}
 };
-*/

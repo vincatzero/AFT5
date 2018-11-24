@@ -88,7 +88,7 @@ void GeneSequencer::ExportChromosome(Chromosome c, const string &filename)
 {
 	string userFile = filename;
 	ofstream outPut;
-	outPut.open(filename);
+	outPut.open(filename, ios::app);
 	c.OutputToFile(outPut);
 	outPut.close();
 };

@@ -9,7 +9,7 @@ class Allele
 	Allele();
 	string GetType();
 	string GetVariant();
-	//string GetSequence(const int &x);
+	string GetSequence(const int &x);
 	void ReturnToMenu();
 	string GetVariant(const int &x);
 	string GetType(const int &x);
