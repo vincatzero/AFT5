@@ -14,6 +14,7 @@ class Allele
 	string GetVariant(const int &x);
 	string GetType(const int &x);
 	string GetSequence();
+	bool alleleClassTestBench();
 
 	Allele(const string &x, const string &y, const string &z);
 

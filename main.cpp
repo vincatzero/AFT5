@@ -34,6 +34,7 @@ void runMenu()
 	string UserOption;
 	string userFile;
 	Chromosome newChromosome;
+	vector<string> testGene;
 
 	while (UserOption != "6")
 	{
@@ -78,6 +79,9 @@ void runMenu()
 			newChromosome = GeneSequencers.ImportChromosome(userFile);
 			break;
 		case 5:
+			cout << "Enter the gene name you would like to search for: " << endl;
+			getline(cin, userFile);
+			testGene = newChromosome.FindGene(userFile);
 			break;
 		case 6:
 			break;

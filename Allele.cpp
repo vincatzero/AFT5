@@ -36,3 +36,6 @@ void Allele::ReturnToMenu()
 	cout << "Press enter to return to menu:" << endl;
 	cin.get(c);
 };
+
+
+

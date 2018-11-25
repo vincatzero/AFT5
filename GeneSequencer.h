@@ -13,8 +13,11 @@ class GeneSequencer
   public:
 	GeneSequencer();
 	Chromosome CreateChromosome();
-	Chromosome ImportChromosome(const string &fileName);
+	Chromosome ImportChromosome(const string &fileName = "");
 	void ExportChromosome(Chromosome c, const string &filename = "");
+	void SequenceChromosomePair(Chromosome c);		  //DO THIS
+	Chromosome DoMeiosis(Chromosome x, Chromosome y); //AND THIS
+	bool PowerOnSelfTest();							  //AND THIS
 
   private:
 	string name;

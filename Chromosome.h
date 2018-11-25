@@ -12,11 +12,15 @@ class Chromosome
 	Chromosome();
 	Chromosome(const Gene &x);
 	void AnalyzeGenotype();
-	void AddGenes(const vector<Allele> &x);
+	void AddGene(const vector<Allele> &x);
 	void AddNameandTrait(const string &x, const string &y);
 	string GetGeneName(const int &x);
 	string GetGeneTrait(const int &x);
 	void OutputToFile(ofstream &ofs);
+	void InputFromFile(ifstream &ifs);	//DO SOMETHING WITH THIS
+	vector<string> FindGene(string n);	//DO THIS
+	Chromosome operator+(Chromosome rhs); //AND THIS
+	string FindUserGene(const string &x);
 
 	Chromosome CreateChromosome();
 

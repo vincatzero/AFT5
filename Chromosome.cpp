@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -65,7 +66,7 @@ void Chromosome::AnalyzeGenotype()
 	}
 };
 
-void Chromosome::AddGenes(const vector<Allele> &x)
+void Chromosome::AddGene(const vector<Allele> &x)
 {
 	genes.push_back(x);
 };
@@ -101,7 +102,7 @@ Chromosome Chromosome::CreateChromosome()
 		Allele newAlleleB(variant2, type2, sequence2);
 
 		vector<Allele> temp = tempGene.AddAllele(newAlleleA, newAlleleB);
-		newChromosome.AddGenes(temp);
+		newChromosome.AddGene(temp);
 		temp.resize(0);						   //DONT THINK I NEED THIS ANYMORE
 		tempGene.SetNameandTrait(name, trait); //OR THIS
 
@@ -131,8 +132,6 @@ Chromosome Chromosome::CreateChromosome()
 
 void Chromosome::OutputToFile(ofstream &ofs)
 {
-	Gene newGene;
-	//ofs.close();
 
 	for (vector<vector<Allele>>::size_type i = 0; i < genes.size(); i++)
 
@@ -149,8 +148,30 @@ void Chromosome::OutputToFile(ofstream &ofs)
 				ofs << ",";
 				counter++;
 			}
-			//ofs << GetGeneName(i) + "," << GetGeneTrait(i) + "," << genes[i][j].GetVariant();
 		}
 		ofs << endl;
 	}
+	cout << endl
+		 << endl;
+	allele.ReturnToMenu();
 };
+
+string Chromosome::FindUserGene(const string &x)
+{
+	return x;
+};
+
+vector<string> Chromosome::FindGene(string n)
+{
+	string userSearch = n;
+
+	for (vector<string>::size_type i = 0; i < geneNameandTrait.size(); i++)
+
+	{
+		if (geneNameandTrait.at(i) == FindUserGene(userSearch))
+		{
+			cout << "found it !!" << endl;
+		};
+	}
+	return geneNameandTrait;
+}

@@ -9,6 +9,7 @@
 using namespace std;
 
 GeneSequencer::GeneSequencer(){};
+void SequenceChromosomePair(Chromosome c){};
 
 Chromosome GeneSequencer::ImportChromosome(const string &fileName) //NEED " = "" "?
 {
@@ -19,6 +20,7 @@ Chromosome GeneSequencer::ImportChromosome(const string &fileName) //NEED " = ""
 	if (!userFile.is_open())
 	{
 		cout << "ERROR. File not found" << endl;
+		//FIXEME after error, it gets stuck
 	};
 	string line;
 	string displayGenes = "y";
@@ -59,7 +61,7 @@ Chromosome GeneSequencer::ImportChromosome(const string &fileName) //NEED " = ""
 				 << "                   Gene sequence 1: " << sequence1 << endl
 				 << "                   Gene variant 2:  " << variant2 << endl
 				 << "                   Gene type 2:     " << type2 << endl
-				 << "                   Gene sequence 2: " << sequence2 << endl //FIXME press enter to return to menu
+				 << "                   Gene sequence 2: " << sequence2 << endl
 				 << "                   ------------------------";
 		}
 
@@ -67,14 +69,8 @@ Chromosome GeneSequencer::ImportChromosome(const string &fileName) //NEED " = ""
 		Allele newAlleleB(variant2, type2, sequence2);
 		Gene tempGene;
 		vector<Allele> temp = tempGene.AddAllele(newAlleleA, newAlleleB);
-		newChromosome.AddGenes(temp);
+		newChromosome.AddGene(temp);
 		newChromosome.AddNameandTrait(name, trait);
-
-		//newChromosome.InputFromFile(userFile);
-
-		//Gene newGene(newAlleleA, newAlleleB);
-		//newGene.SetNameandTrait(name, trait);
-		//newChromosome.AddGene(newGene);
 	}
 	cout << endl
 		 << "A chromosome object with the file information has been created" << endl
@@ -89,6 +85,15 @@ void GeneSequencer::ExportChromosome(Chromosome c, const string &filename)
 	string userFile = filename;
 	ofstream outPut;
 	outPut.open(filename, ios::app);
+	if (!outPut.is_open())
+	{
+		cout << "Error creating/opening file" << endl;
+	}
+	else
+	{
+		cout << "File opened successfully" << endl;
+	}
+
 	c.OutputToFile(outPut);
 	outPut.close();
 };
