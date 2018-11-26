@@ -5,13 +5,14 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <ctime>
 
 using namespace std;
 
 GeneSequencer::GeneSequencer(){};
 void SequenceChromosomePair(Chromosome c){};
 
-Chromosome GeneSequencer::ImportChromosome(const string &fileName) //NEED " = "" "?
+Chromosome GeneSequencer::ImportChromosome(const string &fileName)
 {
 	Chromosome newChromosome;
 	int counter = 0;
@@ -96,4 +97,30 @@ void GeneSequencer::ExportChromosome(Chromosome c, const string &filename)
 
 	c.OutputToFile(outPut);
 	outPut.close();
+};
+
+Chromosome GeneSequencer::DoMeiosis(Chromosome x, Chromosome y)
+{
+	Chromosome newChromosome1 = x;
+	Chromosome newChromosome2 = y;
+
+	chromosomes.push_back(newChromosome1);
+	chromosomes.push_back(newChromosome2);
+	int pos1 = newChromosome1.GetPos();
+	int pos2 = newChromosome2.GetPos();
+
+	vector<Allele> temp1 = newChromosome1.GetGenes(pos1);
+	string name1 = newChromosome1.GetGeneName(pos1);
+	string trait1 = newChromosome1.GetGeneTrait(pos1);
+	vector<Allele> temp2 = newChromosome2.GetGenes(pos2);
+	string name2 = newChromosome2.GetGeneName(pos2);
+	string trait2 = newChromosome2.GetGeneTrait(pos2);
+	Chromosome newChromosome3;
+	newChromosome3.AddGene(temp1);
+	newChromosome3.AddGene(temp2);
+
+	newChromosome3.AddNameandTrait(name1, trait1);
+	newChromosome3.AddNameandTrait(name2, trait2);
+
+	return newChromosome3;
 };

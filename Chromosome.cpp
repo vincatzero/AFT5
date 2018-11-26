@@ -6,6 +6,7 @@
 #include <sstream>
 #include <fstream>
 #include <algorithm>
+#include <ctime>
 
 using namespace std;
 
@@ -79,6 +80,7 @@ Chromosome Chromosome::CreateChromosome()
 
 	while (anotherGene == "y")
 	{
+
 		cout << "Enter the name of the new gene (e.g. TZ458): " << endl;
 		getline(cin, name);
 		cout << "Enter the name of the gene trait (e.g. eye color): " << endl;
@@ -88,6 +90,13 @@ Chromosome Chromosome::CreateChromosome()
 		getline(cin, variant1);
 		cout << "Enter the allele 1 type (e.g. dominant or recessive): " << endl;
 		getline(cin, type1);
+
+		//while (this->type1 != "dominant") // || (this->type1 != "recessive")) //FIXME WHY IS THIS NOT WORKING?
+		//{
+		//	cout << "Entry must be either \"dominant\" or \"recessive\" " << endl;
+		//	getline(cin, type1);
+		//	}
+
 		cout << "Enter the allele 1 nucleotide sequence (e.g. AGTC): " << endl;
 		getline(cin, sequence1);
 
@@ -95,6 +104,7 @@ Chromosome Chromosome::CreateChromosome()
 		getline(cin, variant2);
 		cout << "Enter the allele 2 type (e.g. dominant or recessive): " << endl;
 		getline(cin, type2);
+
 		cout << "Enter the allele 2 nucleotide sequence (e.g. AGTC): " << endl;
 		getline(cin, sequence2);
 
@@ -156,22 +166,51 @@ void Chromosome::OutputToFile(ofstream &ofs)
 	allele.ReturnToMenu();
 };
 
-string Chromosome::FindUserGene(const string &x)
-{
-	return x;
-};
-
-vector<string> Chromosome::FindGene(string n)
+vector<string> Chromosome::FindGene(string n) //FIXME figure out what he wants us to return and how to do it
 {
 	string userSearch = n;
 
 	for (vector<string>::size_type i = 0; i < geneNameandTrait.size(); i++)
 
 	{
-		if (geneNameandTrait.at(i) == FindUserGene(userSearch))
+		if (GetGeneName(i) == userSearch)
 		{
 			cout << "found it !!" << endl;
 		};
 	}
 	return geneNameandTrait;
 }
+/*
+	vector<vector<Allele>> Chromosome::operator+(vector<vector<Allele>> rhs)
+{
+
+	vector<vector<Allele>> newChromosome = rhs;
+	int firstGenePos = (rand() % (newChromosome.size() + 1));
+
+
+	for (vector<vector<Allele>>::size_type i = 0; i < genes.size(); i++)
+
+	{
+
+		for (vector<Allele>::size_type j = 0; j < this->genes[i].size(); j++)
+		{
+		}
+	}
+
+
+	return newChromosome;
+};*/
+
+vector<Allele> Chromosome::GetGenes(int x)
+{
+
+	vector<Allele> temp = genes.at(x);
+	return genes.at(x);
+};
+
+int Chromosome::GetPos()
+{
+
+	int pos = (rand() % (genes.size()));
+	return pos;
+};

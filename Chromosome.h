@@ -17,10 +17,12 @@ class Chromosome
 	string GetGeneName(const int &x);
 	string GetGeneTrait(const int &x);
 	void OutputToFile(ofstream &ofs);
-	void InputFromFile(ifstream &ifs);	//DO SOMETHING WITH THIS
-	vector<string> FindGene(string n);	//DO THIS
-	Chromosome operator+(Chromosome rhs); //AND THIS
-	string FindUserGene(const string &x);
+	void InputFromFile(ifstream &ifs);							  //DO SOMETHING WITH THIS
+	vector<string> FindGene(string n);							  //DO THIS
+	vector<vector<Allele>> operator+(vector<vector<Allele>> rhs); //AND THIS
+	//string FindUserGene(const string &x);
+	vector<Allele> GetGenes(int pos);
+	int GetPos();
 
 	Chromosome CreateChromosome();
 
