@@ -20,63 +20,68 @@ Chromosome GeneSequencer::ImportChromosome(const string &fileName)
 	ifstream userFile(fileName);
 	if (!userFile.is_open())
 	{
-		cout << "ERROR. File not found" << endl;
+		cout << "ERROR. File not found" << endl
+			 << endl;
 		//FIXEME after error, it gets stuck
-	};
-	string line;
-	string displayGenes = "y";
-	while (!userFile.eof())
-	{
-		getline(userFile, line); //FIXME counter number for file without emtpy last line
-		counter++;
 	}
-	counter -= 1;
-	cout << endl
-		 << counter << " genes found on file." << endl
-		 << "Would you like to display them? (y/n): ";
-	getline(cin, displayGenes);
-
-	userFile.clear();
-	userFile.seekg(0, ios::beg);
-	for (int i = 1; i <= counter; i++)
+	else
 	{
-		getline(userFile, name, ','); //DO I HAVE TO INCLUDE THE USER OPTION TO PICK A SPECIFIC CHROMOSOME?
-		getline(userFile, trait, ',');
-		getline(userFile, variant1, ',');
-		getline(userFile, type1, ',');
-		getline(userFile, sequence1, ',');
-		getline(userFile, variant2, ',');
-		getline(userFile, type2, ',');
-		getline(userFile, sequence2, '\n');
-
-		if (displayGenes == "y")
+		string line;
+		string displayGenes = "y";
+		while (!userFile.eof())
 		{
-			cout << endl
-				 << "                   Chromosome " << i << " data " << endl
-				 << endl
-
-				 << "                   Gene name:       " << name << endl
-				 << "                   Gene trait:      " << trait << endl
-				 << "                   Gene variant 1:  " << variant1 << endl
-				 << "                   Gene type 1:     " << type1 << endl
-				 << "                   Gene sequence 1: " << sequence1 << endl
-				 << "                   Gene variant 2:  " << variant2 << endl
-				 << "                   Gene type 2:     " << type2 << endl
-				 << "                   Gene sequence 2: " << sequence2 << endl
-				 << "                   ------------------------";
+			getline(userFile, line); //FIXME counter number for file without emtpy last line
+			counter++;
 		}
+		counter -= 1;
+		cout << endl
+			 << counter << " genes found on file." << endl
+			 << "Would you like to display them? (y/n): ";
+		getline(cin, displayGenes);
 
-		Allele newAlleleA(variant1, type1, sequence1);
-		Allele newAlleleB(variant2, type2, sequence2);
-		Gene tempGene;
-		vector<Allele> temp = tempGene.AddAllele(newAlleleA, newAlleleB);
-		newChromosome.AddGene(temp);
-		newChromosome.AddNameandTrait(name, trait);
-	}
-	cout << endl
-		 << "A chromosome object with the file information has been created" << endl
-		 << endl;
-	userFile.close();
+		userFile.clear();
+		userFile.seekg(0, ios::beg);
+		for (int i = 1; i <= counter; i++)
+		{
+			getline(userFile, name, ','); //DO I HAVE TO INCLUDE THE USER OPTION TO PICK A SPECIFIC CHROMOSOME?
+			getline(userFile, trait, ',');
+			getline(userFile, variant1, ',');
+			getline(userFile, type1, ',');
+			getline(userFile, sequence1, ',');
+			getline(userFile, variant2, ',');
+			getline(userFile, type2, ',');
+			getline(userFile, sequence2, '\n');
+
+			if (displayGenes == "y")
+			{
+				cout << endl
+					 << "                   Chromosome " << i << " data " << endl
+					 << endl
+
+					 << "                   Gene name:       " << name << endl
+					 << "                   Gene trait:      " << trait << endl
+					 << "                   Gene variant 1:  " << variant1 << endl
+					 << "                   Gene type 1:     " << type1 << endl
+					 << "                   Gene sequence 1: " << sequence1 << endl
+					 << "                   Gene variant 2:  " << variant2 << endl
+					 << "                   Gene type 2:     " << type2 << endl
+					 << "                   Gene sequence 2: " << sequence2 << endl
+					 << "                   ------------------------";
+			}
+
+			Allele newAlleleA(variant1, type1, sequence1);
+			Allele newAlleleB(variant2, type2, sequence2);
+			Gene tempGene;
+			vector<Allele> temp = tempGene.AddAllele(newAlleleA, newAlleleB);
+			newChromosome.AddGene(temp);
+			newChromosome.AddNameandTrait(name, trait);
+		}
+		cout << endl
+			 << "A chromosome object with the file information has been created" << endl
+			 << endl;
+		userFile.close();
+	} //THIS ELSE IS MAKING ALL THE COUTS AMBIGUOUS
+	Allele allele;
 	allele.ReturnToMenu();
 	return newChromosome;
 };
@@ -121,6 +126,12 @@ Chromosome GeneSequencer::DoMeiosis(Chromosome x, Chromosome y)
 
 	newChromosome3.AddNameandTrait(name1, trait1);
 	newChromosome3.AddNameandTrait(name2, trait2);
+
+	cout << endl
+		 << "A chromosome object has been created with genes from both previous chromosomes" << endl
+		 << endl;
+	Allele allele;
+	allele.ReturnToMenu();
 
 	return newChromosome3;
 };

@@ -3,7 +3,8 @@ gene2,ball size,big,dominant,acaa,small,recessive,daca
 tea,af,afd,af,af,a,fa,afd
 test1,eye color,brown,dominant,gtca,blue,recessive,agca
 test2,skin color,brown,dominant,aca,white,recessive,adca
-test1,,brown,dominant,gtca,blue,recessive,agca
-test6,,blonde,dominant,atca,brown,recessive,daca
+test1,trait,brown,dominant,gtca,blue,recessive,agca
+test6,trait,blonde,dominant,atca,brown,recessive,daca
 test2,skin color,white,dominant,ada,black,recessive,csac
 afa,fa,f,af,as,fasfd,afd,asdf
+-

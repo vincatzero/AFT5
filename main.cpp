@@ -44,8 +44,8 @@ void runMenu()
 			 << endl
 			 << "1 - Create Chromosome" << endl
 			 << "2 - Analyze Chromosome" << endl
-			 << "3 - Output Chromosome to File" << endl
-			 << "4 - Input Chromosome from File" << endl
+			 << "3 - Output Chromosome to file" << endl
+			 << "4 - Input Chromosome from file" << endl
 			 << "5 - Combine Chromosomes" << endl
 			 << "6 - Exit" << endl
 			 << endl
