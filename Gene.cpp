@@ -4,10 +4,8 @@
 #include <vector>
 #include <iostream>
 using namespace std;
-Gene::Gene()
-{
-	geneName = "noNameSet";
-	geneTrait = "noTraitSet";
+Gene::Gene(){
+
 };
 vector<Allele> Gene::AddAllele(const Allele &x, const Allele &y)
 {
@@ -17,13 +15,30 @@ vector<Allele> Gene::AddAllele(const Allele &x, const Allele &y)
 	return alleles;
 };
 
-void Gene::SetNameandTrait(const string &x, const string &y)
-{
-	geneName = x;
-	geneTrait = y;
-};
-
 string Gene::FindUserGene(const string &x)
 {
 	return x;
+};
+
+bool Gene::GeneClassTestBench()
+{
+
+	Allele testAllele1;
+	Allele testAllele2;
+
+	AddAllele(testAllele1, testAllele2);
+	if (alleles.size() != 2)
+	{
+		cout << "Gene class vector<Allele> resize error" << endl;
+		return false;
+	}
+	else
+	{
+		cout << "All gene class tests passed" << endl;
+	}
+	//for (vector<Allele>::size_type i = 0; i < alleles.size(); i++)
+	//{
+	//}
+
+	return true;
 };

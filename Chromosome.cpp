@@ -65,6 +65,8 @@ void Chromosome::AnalyzeGenotype()
 			}
 		}
 	}
+	Allele allele;
+	allele.ReturnToMenu();
 };
 
 void Chromosome::AddGene(const vector<Allele> &x)
@@ -113,8 +115,8 @@ Chromosome Chromosome::CreateChromosome()
 
 		vector<Allele> temp = tempGene.AddAllele(newAlleleA, newAlleleB);
 		newChromosome.AddGene(temp);
-		temp.resize(0);						   //DONT THINK I NEED THIS ANYMORE
-		tempGene.SetNameandTrait(name, trait); //OR THIS
+		//temp.resize(0);						   //DONT THINK I NEED THIS ANYMORE
+		//tempGene.SetNameandTrait(name, trait); //OR THIS
 
 		newChromosome.AddNameandTrait(name, trait);
 		//Gene newGene;

@@ -36,9 +36,18 @@ void runMenu()
 	Chromosome newChromosome;
 	Chromosome newChromosome2;
 	vector<string> testGene;
+	bool firsttime = true;
 
 	while (UserOption != "6")
 	{
+		if (firsttime = true) //FIXME DOES IT EVERY TIME
+		{
+			Allele allele;
+			Gene gene;
+			cout << boolalpha << allele.alleleClassTestBench() << " " << gene.GeneClassTestBench() << endl;
+			firsttime = false;
+		}
+
 		cout << endl
 			 << "        * MENU *" << endl
 			 << endl
@@ -93,6 +102,7 @@ void runMenu()
 
 			break;
 		case 6:
+
 			break;
 		}
 	}

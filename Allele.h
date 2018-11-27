@@ -15,6 +15,8 @@ class Allele
 	string GetType(const int &x);
 	string GetSequence();
 	bool alleleClassTestBench();
+	void SetThreeVariables(string &variant, string &type, string &sequence);
+	void WriteAlleleToFile(ofstream &, string &userfile);
 
 	Allele(const string &x, const string &y, const string &z);
 
