@@ -135,3 +135,85 @@ Chromosome GeneSequencer::DoMeiosis(Chromosome x, Chromosome y)
 
 	return newChromosome3;
 };
+
+Chromosome GeneSequencer::CreateChromosome()
+{
+	string anotherGene = "y";
+	Chromosome newChromosome;
+	Gene tempGene;
+
+	while (anotherGene == "y")
+	{
+
+		cout << "Enter the name of the new gene (e.g. TZ458): " << endl;
+		getline(cin, name);
+		cout << "Enter the name of the gene trait (e.g. eye color): " << endl;
+		getline(cin, trait);
+
+		cout << "Enter the allele 1 variant (e.g. brown/blue/etc.): " << endl;
+		getline(cin, variant1);
+		cout << "Enter the allele 1 type (e.g. dominant or recessive): " << endl;
+		getline(cin, type1);
+
+		//while (this->type1 != "dominant") // || (this->type1 != "recessive")) //FIXME WHY IS THIS NOT WORKING?
+		//{
+		//	cout << "Entry must be either \"dominant\" or \"recessive\" " << endl;
+		//	getline(cin, type1);
+		//	}
+
+		cout << "Enter the allele 1 nucleotide sequence (e.g. AGTC): " << endl;
+		getline(cin, sequence1);
+
+		cout << "Enter the allele 2 variant (e.g. brown/blue/etc.): " << endl;
+		getline(cin, variant2);
+		cout << "Enter the allele 2 type (e.g. dominant or recessive): " << endl;
+		getline(cin, type2);
+
+		cout << "Enter the allele 2 nucleotide sequence (e.g. AGTC): " << endl;
+		getline(cin, sequence2);
+
+		Allele newAlleleA(variant1, type1, sequence1);
+		Allele newAlleleB(variant2, type2, sequence2);
+
+		vector<Allele> temp = tempGene.AddAllele(newAlleleA, newAlleleB);
+		newChromosome.AddGene(temp);
+		//temp.resize(0);						   //DONT THINK I NEED THIS ANYMORE
+		//tempGene.SetNameandTrait(name, trait); //OR THIS
+
+		newChromosome.AddNameandTrait(name, trait);
+		//Gene newGene;
+		//newGene.AddAllele(newAlleleA, newAlleleB);
+
+		//	Gene tempGene;
+		//vector<Allele> temp = tempGene.GetAlleles();
+
+		//	newGene.SetNameandTrait(name, trait);
+
+		//newChromosome.AddGenes(temp);
+
+		//Gene newGene(newAlleleA, newAlleleB);
+		//newGene.AddAllele(newAlleleA, newAlleleB);
+		//Chromosome newc
+
+		//newGene.SetNameandTrait(name, trait);
+		//newChromosome.AddGene(newGene);
+
+		cout << "Would you like to add another gene: (y/n)" << endl;
+		getline(cin, anotherGene);
+	}
+	return newChromosome;
+};
+
+bool GeneSequencer::PowerOnSelfTest()
+{
+	Allele allele;
+	Gene gene;
+	Chromosome chromosome;
+	//cout << boolalpha << allele.alleleClassTestBench() << " " << gene.GeneClassTestBench() << endl;
+	if ((allele.alleleClassTestBench() != true) || (gene.GeneClassTestBench() != true) || (chromosome.ChromosomeClassTestBench() != true))
+	{
+		return false;
+	}
+
+	return true;
+};

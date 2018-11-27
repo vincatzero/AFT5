@@ -36,16 +36,16 @@ void runMenu()
 	Chromosome newChromosome;
 	Chromosome newChromosome2;
 	vector<string> testGene;
-	bool firsttime = true;
-
+	int counter;
 	while (UserOption != "6")
 	{
-		if (firsttime = true) //FIXME DOES IT EVERY TIME
+
+		while (counter < 1)
+
+		//FIXED? DOES IT EVERY TIME
 		{
-			Allele allele;
-			Gene gene;
-			cout << boolalpha << allele.alleleClassTestBench() << " " << gene.GeneClassTestBench() << endl;
-			firsttime = false;
+			GeneSequencers.PowerOnSelfTest();
+			counter = 1;
 		}
 
 		cout << endl
@@ -72,7 +72,7 @@ void runMenu()
 		switch (userChoice)
 		{
 		case 1:
-			newChromosome = newChromosome.CreateChromosome();
+			newChromosome = GeneSequencers.CreateChromosome();
 			break;
 		case 2:
 			newChromosome.AnalyzeGenotype();
@@ -92,7 +92,7 @@ void runMenu()
 		case 5:
 			cout << "Enter the information for the second chromosome" << endl
 				 << endl;
-			newChromosome2 = newChromosome2.CreateChromosome();
+			newChromosome2 = GeneSequencers.CreateChromosome();
 			newChromosome = GeneSequencers.DoMeiosis(newChromosome, newChromosome2);
 
 			/*

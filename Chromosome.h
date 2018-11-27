@@ -23,19 +23,13 @@ class Chromosome
 	//string FindUserGene(const string &x);
 	vector<Allele> GetGenes(int pos);
 	int GetPos();
+	bool ChromosomeClassTestBench();
 
-	Chromosome CreateChromosome();
+	//Chromosome CreateChromosome();
 
   private:
 	vector<vector<Allele>> genes;
 	vector<string> geneNameandTrait;
-	string name;
-	string trait;
-	string type1;
-	string sequence1;
-	string variant1;
-	string type2;
-	string sequence2;
-	string variant2;
-	Allele allele;
+
+	//Allele allele;
 };

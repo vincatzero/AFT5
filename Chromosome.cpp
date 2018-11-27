@@ -17,6 +17,7 @@ Chromosome::Chromosome(const Gene &x){
 
 string Chromosome::GetGeneName(const int &x)
 {
+	string name;
 	string tempName = geneNameandTrait.at(x);
 	istringstream ss(tempName);
 	getline(ss, name, ',');
@@ -25,6 +26,7 @@ string Chromosome::GetGeneName(const int &x)
 
 string Chromosome::GetGeneTrait(const int &x)
 {
+	string trait;
 	string tempTrait = geneNameandTrait.at(x);
 	string trait2;
 	istringstream ss(tempTrait);
@@ -69,11 +71,11 @@ void Chromosome::AnalyzeGenotype()
 	allele.ReturnToMenu();
 };
 
-void Chromosome::AddGene(const vector<Allele> &x)
+void Chromosome::AddGene(const vector<Allele> &x) //CONST?
 {
 	genes.push_back(x);
 };
-
+/*
 Chromosome Chromosome::CreateChromosome()
 {
 	string anotherGene = "y";
@@ -140,7 +142,7 @@ Chromosome Chromosome::CreateChromosome()
 		getline(cin, anotherGene);
 	}
 	return newChromosome;
-};
+}; */
 
 void Chromosome::OutputToFile(ofstream &ofs)
 {
@@ -165,6 +167,7 @@ void Chromosome::OutputToFile(ofstream &ofs)
 	}
 	cout << endl
 		 << endl;
+	Allele allele;
 	allele.ReturnToMenu();
 };
 
@@ -215,4 +218,39 @@ int Chromosome::GetPos()
 
 	int pos = (rand() % (genes.size()));
 	return pos;
+};
+
+bool Chromosome::ChromosomeClassTestBench()
+{
+	Chromosome testData;
+	vector<Allele> testVector;
+	string testName = "testName";
+	string testTrait = "testTrait";
+
+	testData.AddGene(testVector);
+	if (testData.genes.size() != 1)
+	{
+		cout << "Chrosome class resize vector error" << endl;
+		return false;
+	}
+
+	testData.AddNameandTrait(testName, testTrait);
+	if (testData.geneNameandTrait[0] != "testName,testTrait")
+	{
+		cout << "Chromosome class set Name/Trait error" << endl;
+		return false;
+	}
+
+	if (testName != testData.GetGeneName(0))
+	{
+		cout << "Chromosome class get name error" << endl;
+		return false;
+	}
+	if (testTrait != testData.GetGeneTrait(0))
+	{
+		cout << "Chromosome class get trait error" << endl;
+		return false;
+	}
+
+	return true;
 };
