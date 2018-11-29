@@ -92,7 +92,7 @@ Chromosome GeneSequencer::CreateChromosome()
 
 		Allele newAlleleA(variant1, type1, sequence1);
 		Allele newAlleleB(variant2, type2, sequence2);
-		newGene.SetNameandTrait(name, trait);
+		newGene.SetNameandTrait(name, trait); //FIXME USE CONSTRUCTORS
 
 		newGene.AddAlleles(newAlleleA, newAlleleB); //should this be void?
 

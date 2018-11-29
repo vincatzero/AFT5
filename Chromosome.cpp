@@ -90,9 +90,8 @@ void Chromosome::OutputToFile(ofstream &ofs)
 	for (vector<Gene>::size_type i = 0; i < Genes.size(); i++)
 	{
 		tempGene = Genes.at(i);
+		tempGene.OutputToFile(ofs); //SHOULD THIS BE IN THE LOOP?
 	}
-
-	tempGene.OutputToFile(ofs); //SHOULD THIS BE IN THE LOOP?
 };
 
 void Chromosome::AnalyzeGenotype()
@@ -139,10 +138,19 @@ bool Chromosome::ChromosomeClassTestBench()
 	Chromosome testData;
 	Allele testAllele1;
 	Allele testAllele2;
+	string name;
+	string trait;
+	string type1;
+	string sequence1;
+	string variant1;
+	string type2;
+	string sequence2;
+	string variant2;
+	ofstream tester_out;
+	ifstream tester_in;
+
 	Gene testGene1("testname1", "testtrait1", testAllele1, testAllele2);
 	Gene testGene2("testname2", "testtrait2", testAllele1, testAllele2);
-
-	ofstream tester_out;
 
 	testData.AddGene(testGene1);
 	testData.AddGene(testGene2);
@@ -156,12 +164,26 @@ bool Chromosome::ChromosomeClassTestBench()
 
 	testData.OutputToFile(tester_out);
 	tester_out.close();
-
-	/*else
+	tester_in.open(testfile);
+	for (int i = 1; i <= 2; i++) //check that 2 is right
 	{
-		cout << "All chromosome class tests passed" << endl;
-		remove("testing123ABC098.csv");
-	}*/
+		getline(tester_in, name, ',');
+		getline(tester_in, trait, ',');
+		getline(tester_in, variant1, ',');
+		getline(tester_in, type1, ',');
+		getline(tester_in, sequence1, ',');
+		getline(tester_in, variant2, ',');
+		getline(tester_in, type2, ',');
+		getline(tester_in, sequence2, '\n');
+
+		if (name != "testname2")
+		{
+			cout << "PROBLEM";
+		}
+	}
+	//ADD ELSE
+	cout << "All chromosome class tests passed" << endl;
+	remove("testing123ABC098.csv");
 
 	Genes.resize(0); //MAKE SURE I NEED THIS
 	return true;
