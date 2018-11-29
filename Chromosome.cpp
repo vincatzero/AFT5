@@ -10,166 +10,23 @@
 
 using namespace std;
 
-Chromosome::Chromosome(){};
-Chromosome::Chromosome(const Gene &x){
-	//genes.push_back(x);
-};
+Chromosome::Chromosome(){
 
-string Chromosome::GetGeneName(const int &x)
-{
-	string name;
-	string tempName = geneNameandTrait.at(x);
-	istringstream ss(tempName);
-	getline(ss, name, ',');
-	return name;
-};
-
-string Chromosome::GetGeneTrait(const int &x)
-{
-	string trait;
-	string tempTrait = geneNameandTrait.at(x);
-	string trait2;
-	istringstream ss(tempTrait);
-	getline(ss, trait, ',');
-	getline(ss, trait2, ',');
-
-	return trait2;
-};
-
-void Chromosome::AddNameandTrait(const string &x, const string &y)
-{
-	geneNameandTrait.push_back(x + "," + y);
-};
-
-void Chromosome::AnalyzeGenotype()
-{
-	string expressedAllele;
-	string expressedNucleotideSeq;
-
-	for (vector<vector<Allele>>::size_type i = 0; i < genes.size(); i++)
-
-	{
-		for (vector<Allele>::size_type j = 0; j < genes[i].size(); j++)
-
-		{
-			if (genes[i][j].GetType() == "dominant")
-
-			{
-				expressedNucleotideSeq = genes[i][j].GetSequence();
-				expressedAllele = genes[i][j].GetVariant();
-
-				cout << "        Gene " << i + 1 << endl
-					 << "Gene name:            " << GetGeneName(i) << endl
-					 << "Genetic trait:        " << GetGeneTrait(i) << endl
-					 << "Expressed allele:     " << expressedAllele << endl
-					 << "Nucleotide sequence:  " << expressedNucleotideSeq << endl
-					 << endl;
-			}
-		}
-	}
-	Allele allele;
-	allele.ReturnToMenu();
-};
-
-void Chromosome::AddGene(const vector<Allele> &x) //CONST?
-{
-	genes.push_back(x);
 };
 /*
-Chromosome Chromosome::CreateChromosome()
-{
-	string anotherGene = "y";
-	Chromosome newChromosome;
-	Gene tempGene;
-
-	while (anotherGene == "y")
-	{
-
-		cout << "Enter the name of the new gene (e.g. TZ458): " << endl;
-		getline(cin, name);
-		cout << "Enter the name of the gene trait (e.g. eye color): " << endl;
-		getline(cin, trait);
-
-		cout << "Enter the allele 1 variant (e.g. brown/blue/etc.): " << endl;
-		getline(cin, variant1);
-		cout << "Enter the allele 1 type (e.g. dominant or recessive): " << endl;
-		getline(cin, type1);
-
-		//while (this->type1 != "dominant") // || (this->type1 != "recessive")) //FIXME WHY IS THIS NOT WORKING?
-		//{
-		//	cout << "Entry must be either \"dominant\" or \"recessive\" " << endl;
-		//	getline(cin, type1);
-		//	}
-
-		cout << "Enter the allele 1 nucleotide sequence (e.g. AGTC): " << endl;
-		getline(cin, sequence1);
-
-		cout << "Enter the allele 2 variant (e.g. brown/blue/etc.): " << endl;
-		getline(cin, variant2);
-		cout << "Enter the allele 2 type (e.g. dominant or recessive): " << endl;
-		getline(cin, type2);
-
-		cout << "Enter the allele 2 nucleotide sequence (e.g. AGTC): " << endl;
-		getline(cin, sequence2);
-
-		Allele newAlleleA(variant1, type1, sequence1);
-		Allele newAlleleB(variant2, type2, sequence2);
-
-		vector<Allele> temp = tempGene.AddAllele(newAlleleA, newAlleleB);
-		newChromosome.AddGene(temp);
-		//temp.resize(0);						   //DONT THINK I NEED THIS ANYMORE
-		//tempGene.SetNameandTrait(name, trait); //OR THIS
-
-		newChromosome.AddNameandTrait(name, trait);
-		//Gene newGene;
-		//newGene.AddAllele(newAlleleA, newAlleleB);
-
-		//	Gene tempGene;
-		//vector<Allele> temp = tempGene.GetAlleles();
-
-		//	newGene.SetNameandTrait(name, trait);
-
-		//newChromosome.AddGenes(temp);
-
-		//Gene newGene(newAlleleA, newAlleleB);
-		//newGene.AddAllele(newAlleleA, newAlleleB);
-		//Chromosome newc
-
-		//newGene.SetNameandTrait(name, trait);
-		//newChromosome.AddGene(newGene);
-
-		cout << "Would you like to add another gene: (y/n)" << endl;
-		getline(cin, anotherGene);
-	}
-	return newChromosome;
-}; */
-
-void Chromosome::OutputToFile(ofstream &ofs)
+Chromosome::Chromosome(const Gene &x)
 {
 
-	for (vector<vector<Allele>>::size_type i = 0; i < genes.size(); i++)
-
-	{
-		ofs << GetGeneName(i) + "," << GetGeneTrait(i) + ",";
-		int counter = 0;
-
-		for (vector<Allele>::size_type j = 0; j < this->genes[i].size(); j++)
-
-		{
-			ofs << genes[i][j].GetVariant() + "," << genes[i][j].GetType(i) + "," << genes[i][j].GetSequence(i);
-			if (counter == 0)
-			{
-				ofs << ",";
-				counter++;
-			}
-		}
-		ofs << endl;
-	}
-	cout << endl
-		 << endl;
-	Allele allele;
-	allele.ReturnToMenu();
+	Genes.push_back(x);
 };
+*/
+void Chromosome::AddGene(const Gene &x) //DELETE THIS FUNCTION
+{
+	Genes.push_back(x);
+};
+
+/*
+
 
 vector<string> Chromosome::FindGene(string n) //FIXME figure out what he wants us to return and how to do it
 {
@@ -185,40 +42,8 @@ vector<string> Chromosome::FindGene(string n) //FIXME figure out what he wants u
 	}
 	return geneNameandTrait;
 }
-/*
-	vector<vector<Allele>> Chromosome::operator+(vector<vector<Allele>> rhs)
-{
-
-	vector<vector<Allele>> newChromosome = rhs;
-	int firstGenePos = (rand() % (newChromosome.size() + 1));
 
 
-	for (vector<vector<Allele>>::size_type i = 0; i < genes.size(); i++)
-
-	{
-
-		for (vector<Allele>::size_type j = 0; j < this->genes[i].size(); j++)
-		{
-		}
-	}
-
-
-	return newChromosome;
-};*/
-
-vector<Allele> Chromosome::GetGenes(int x)
-{
-
-	vector<Allele> temp = genes.at(x);
-	return genes.at(x);
-};
-
-int Chromosome::GetPos()
-{
-
-	int pos = (rand() % (genes.size()));
-	return pos;
-};
 
 bool Chromosome::ChromosomeClassTestBench()
 {
@@ -248,9 +73,96 @@ bool Chromosome::ChromosomeClassTestBench()
 	}
 	if (testTrait != testData.GetGeneTrait(0))
 	{
-		cout << "Chromosome class get trait error" << endl;
-		return false;
+	}
+}
+*/
+//else { cout << "All chromosome class tests passed" << endl; }
+//return true;
+
+void Chromosome::InputFromFile(ifstream &ifs){
+	//FIXME DELETE THIS OR FIGURE OUT WHAT I WANT TO DO WITH IT
+};
+
+void Chromosome::OutputToFile(ofstream &ofs)
+{
+	Gene tempGene;
+
+	for (vector<Gene>::size_type i = 0; i < Genes.size(); i++)
+	{
+		tempGene = Genes.at(i);
 	}
 
+	tempGene.OutputToFile(ofs); //SHOULD THIS BE IN THE LOOP?
+};
+
+void Chromosome::AnalyzeGenotype()
+{
+	string expressedAllele;
+	string expressedNucleotideSeq;
+	Gene tempGene;
+	for (vector<Gene>::size_type i = 0; i < Genes.size(); i++)
+	{
+		cout << "        Gene " << i + 1 << endl
+			 << "Gene name:            " << Genes[i].GetGeneName() << endl
+			 << "Genetic trait:        " << Genes[i].GetGeneTrait() << endl;
+		tempGene = Genes.at(i);
+		tempGene.AnalyzeGenotype();
+	}
+};
+
+Chromosome Chromosome::operator+(Chromosome rhs)
+{
+	Gene a, b;
+	for (vector<Gene>::size_type i = 0; i < Genes.size(); i++)
+	{
+		a = this->Genes[i];
+		b = rhs.Genes[i];
+	}
+
+	Gene newGene(a.GetGeneName(), a.GetGeneTrait(), a.doMeiosis(), b.doMeiosis()); //TEST THIS
+	cout
+		<< endl
+		<< "A new chromosome object has been" << endl
+		<< "created through meiosis." << endl
+		<< endl;
+	//newGene.SetNameandTrait(a.GetGeneName(), a.GetGeneTrait());
+	Chromosome newChromosome;
+	newChromosome.AddGene(newGene); //TEST THIS TOO ESPECIALLY FOR GENE NAME
+	//a.doMeiosis().ReturnToMenu();
+
+	return newChromosome;
+};
+
+bool Chromosome::ChromosomeClassTestBench()
+{
+	string testfile = "testing123ABC098.csv";
+	Chromosome testData;
+	Allele testAllele1;
+	Allele testAllele2;
+	Gene testGene1("testname1", "testtrait1", testAllele1, testAllele2);
+	Gene testGene2("testname2", "testtrait2", testAllele1, testAllele2);
+
+	ofstream tester_out;
+
+	testData.AddGene(testGene1);
+	testData.AddGene(testGene2);
+	if (testData.Genes.size() != 2)
+	{
+		cout << "Chromosome class add gene error" << endl;
+		return false;
+	}
+	//testGene1.SetNameandTrait("testname", "testtrait");
+	tester_out.open(testfile);
+
+	testData.OutputToFile(tester_out);
+	tester_out.close();
+
+	/*else
+	{
+		cout << "All chromosome class tests passed" << endl;
+		remove("testing123ABC098.csv");
+	}*/
+
+	Genes.resize(0); //MAKE SURE I NEED THIS
 	return true;
 };

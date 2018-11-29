@@ -30,6 +30,9 @@ int main(int argc, char *argv[])
 
 void runMenu()
 {
+	Allele allele;
+	Gene newGene; //DELETE THIS
+
 	GeneSequencer GeneSequencers;
 	string UserOption;
 	string userFile;
@@ -44,7 +47,7 @@ void runMenu()
 
 		//FIXED? DOES IT EVERY TIME
 		{
-			GeneSequencers.PowerOnSelfTest();
+			//GeneSequencers.PowerOnSelfTest();
 			counter = 1;
 		}
 
@@ -72,10 +75,13 @@ void runMenu()
 		switch (userChoice)
 		{
 		case 1:
-			newChromosome = GeneSequencers.CreateChromosome();
+			//allele.alleleClassTestBench();
+			//newGene.GeneClassTestBench();
+			//newChromosome = GeneSequencers.CreateChromosome();
+			newChromosome.ChromosomeClassTestBench();
 			break;
 		case 2:
-			newChromosome.AnalyzeGenotype();
+			GeneSequencers.SequenceChromosomePair(newChromosome);
 			break;
 		case 3:
 			cout << "Enter the name of the file you would like to export to: " << endl;
@@ -94,6 +100,7 @@ void runMenu()
 				 << endl;
 			newChromosome2 = GeneSequencers.CreateChromosome();
 			newChromosome = GeneSequencers.DoMeiosis(newChromosome, newChromosome2);
+			//newChromosome = GeneSequencers.DoMeiosis(newChromosome,newChromosome2);
 
 			/*
 			cout << "Enter the gene name you would like to search for: " << endl;

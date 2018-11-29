@@ -7,18 +7,18 @@ class Allele
 
   public:
 	Allele();
+	Allele(const string &x, const string &y, const string &z);
+
 	string GetType();
 	string GetVariant();
+	string GetSequence();
+
 	string GetSequence(const int &x);
 	void ReturnToMenu();
-	string GetVariant(const int &x);
-	string GetType(const int &x);
-	string GetSequence();
-	bool alleleClassTestBench();
 	void SetThreeVariables(string &variant, string &type, string &sequence);
-	void WriteAlleleToFile(ofstream &, string &userfile);
-
-	Allele(const string &x, const string &y, const string &z);
+	void OutputToFile(ofstream &ofs);
+	void AnalyzeGenotype();
+	bool alleleClassTestBench();
 
   private:
 	string alleleVariant;
