@@ -13,46 +13,10 @@ GeneSequencer::GeneSequencer(){};
 void GeneSequencer::SequenceChromosomePair(Chromosome c)
 {
 
-	//cout << "test";
 	c.AnalyzeGenotype();
-	//cout << "test";
 
-	//cout here?
-	//add menu
+	ReturnToMenu();
 };
-/*
-Chromosome GeneSequencer::DoMeiosis(Chromosome x, Chromosome y)
-{
-	Chromosome newChromosome1 = x;
-	Chromosome newChromosome2 = y;
-
-	chromosomes.push_back(newChromosome1);
-	chromosomes.push_back(newChromosome2);
-	int pos1 = newChromosome1.GetPos();
-	int pos2 = newChromosome2.GetPos();
-
-	vector<Allele> temp1 = newChromosome1.GetGenes(pos1);
-	string name1 = newChromosome1.GetGeneName(pos1);
-	string trait1 = newChromosome1.GetGeneTrait(pos1);
-	vector<Allele> temp2 = newChromosome2.GetGenes(pos2);
-	string name2 = newChromosome2.GetGeneName(pos2);
-	string trait2 = newChromosome2.GetGeneTrait(pos2);
-	Chromosome newChromosome3;
-	//newChromosome3.AddGene(temp1);
-	//newChromosome3.AddGene(temp2);
-
-	newChromosome3.AddNameandTrait(name1, trait1);
-	newChromosome3.AddNameandTrait(name2, trait2);
-
-	cout << endl
-		 << "A chromosome object has been created with genes from both previous chromosomes" << endl
-		 << endl;
-	Allele allele;
-	allele.ReturnToMenu();
-
-	return newChromosome3;
-};
-*/
 
 Chromosome GeneSequencer::CreateChromosome()
 {
@@ -73,12 +37,12 @@ Chromosome GeneSequencer::CreateChromosome()
 		cout << "Enter the allele 1 type (e.g. dominant or recessive): " << endl;
 		getline(cin, type1);
 
-		/*while ((type1 != "dominant") || (type1 != "recessive")) //FIXME WHY IS THIS NOT WORKING?
+		while (type1 != "dominant" && type1 != "recessive")
 		{
 			cout << "Entry must be either \"dominant\" or \"recessive\" " << endl;
 			getline(cin, type1);
 		}
-*/
+
 		cout << "Enter the allele 1 nucleotide sequence (e.g. AGTC): " << endl;
 		getline(cin, sequence1);
 
@@ -86,6 +50,19 @@ Chromosome GeneSequencer::CreateChromosome()
 		getline(cin, variant2);
 		cout << "Enter the allele 2 type (e.g. dominant or recessive): " << endl;
 		getline(cin, type2);
+		while (type2 != "dominant" && type2 != "recessive")
+		{
+			cout << "Entry must be either \"dominant\" or \"recessive\" " << endl;
+			getline(cin, type2);
+		}
+		while (type1 == type2)
+		{
+			cout << endl
+				 << endl
+				 << "One type must be dominant and one must be recessive" << endl;
+			cout << "Enter the allele 2 type (e.g. dominant or recessive): " << endl;
+			getline(cin, type2);
+		}
 
 		cout << "Enter the allele 2 nucleotide sequence (e.g. AGTC): " << endl;
 		getline(cin, sequence2);
@@ -94,7 +71,7 @@ Chromosome GeneSequencer::CreateChromosome()
 		Allele newAlleleB(variant2, type2, sequence2);
 		newGene.SetNameandTrait(name, trait); //FIXME USE CONSTRUCTORS
 
-		newGene.AddAlleles(newAlleleA, newAlleleB); //should this be void?
+		newGene.AddAlleles(newAlleleA, newAlleleB);
 
 		newChromosome.AddGene(newGene);
 
@@ -103,32 +80,16 @@ Chromosome GeneSequencer::CreateChromosome()
 	}
 	return newChromosome;
 };
-/*
-bool GeneSequencer::PowerOnSelfTest()
-{
-	Allele allele;
-	Gene gene;
-	Chromosome chromosome;
-	//cout << boolalpha << allele.alleleClassTestBench() << " " << gene.GeneClassTestBench() << endl;
-	if ((allele.alleleClassTestBench() != true) || (gene.GeneClassTestBench() != true) || (chromosome.ChromosomeClassTestBench() != true))
-	{
-		return false;
-	}
-
-	return true;
-};*/
 
 Chromosome GeneSequencer::ImportChromosome(const string &fileName)
 {
 	Chromosome newChromosome;
 	int counter = 0;
-	//string fileToOpen = fileName;
 	ifstream userFile(fileName);
 	if (!userFile.is_open())
 	{
 		cout << "ERROR. File not found" << endl
 			 << endl;
-		//FIXEME after error, it gets stuck
 	}
 
 	else
@@ -137,7 +98,7 @@ Chromosome GeneSequencer::ImportChromosome(const string &fileName)
 		string displayGenes = "y";
 		while (!userFile.eof())
 		{
-			getline(userFile, line); //FIXME counter number for file without emtpy last line
+			getline(userFile, line);
 			counter++;
 		}
 		counter -= 1;
@@ -175,13 +136,9 @@ Chromosome GeneSequencer::ImportChromosome(const string &fileName)
 					 << "                   Gene sequence 2: " << sequence2 << endl
 					 << "                   ------------------------";
 			}
-			//newChromosome.InputFromFile(userFile);
 			Allele newAlleleA(variant1, type1, sequence1);
 			Allele newAlleleB(variant2, type2, sequence2);
 			Gene newGene(name, trait, newAlleleA, newAlleleB);
-			//	newGene.SetNameandTrait(name, trait);
-
-			//newGene.AddAlleles(newAlleleA, newAlleleB); //DOES THIS DO ANYTHNG AT ALL?
 
 			newChromosome.AddGene(newGene);
 		}
@@ -190,8 +147,8 @@ Chromosome GeneSequencer::ImportChromosome(const string &fileName)
 			 << endl;
 		userFile.close();
 	}
-	Allele allele;
-	allele.ReturnToMenu();
+
+	ReturnToMenu();
 	return newChromosome;
 };
 void GeneSequencer::ExportChromosome(Chromosome c, const string &filename)
@@ -204,16 +161,51 @@ void GeneSequencer::ExportChromosome(Chromosome c, const string &filename)
 	}
 	else
 	{
-		cout << "File opened successfully" << endl;
+		cout << "File opened/created successfully" << endl;
 	}
 
 	c.OutputToFile(outPut);
 	outPut.close();
+	cout << endl;
+	ReturnToMenu();
 };
 
 Chromosome GeneSequencer::DoMeiosis(Chromosome x, Chromosome y)
 {
 	Chromosome c = x + y;
+	cout
+		<< endl
+		<< "A new chromosome object has been" << endl
+		<< "created through meiosis." << endl
+		<< endl;
 	return c;
-	//add menu
+	ReturnToMenu();
+};
+
+void GeneSequencer::ReturnToMenu()
+{
+	char c;
+	cout << "Press enter to return to menu:" << endl;
+	cin.get(c);
+};
+
+bool GeneSequencer::PowerOnSelfTest()
+{
+	Allele testAllele;
+	Gene testGene;
+	Chromosome testChromosome;
+	GeneSequencer testData;
+
+	testAllele.alleleClassTestBench();
+	testGene.GeneClassTestBench();
+	testChromosome.ChromosomeClassTestBench();
+
+	cout << "test";
+	streambuf *cout_sbuf = std::cout.rdbuf();
+	ofstream fout("/dev/null");
+	cout.rdbuf(fout.rdbuf());
+
+	testData.CreateChromosome();
+	cout.rdbuf(cout_sbuf);
+	return true;
 };

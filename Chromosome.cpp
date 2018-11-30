@@ -13,74 +13,10 @@ using namespace std;
 Chromosome::Chromosome(){
 
 };
-/*
-Chromosome::Chromosome(const Gene &x)
-{
 
-	Genes.push_back(x);
-};
-*/
-void Chromosome::AddGene(const Gene &x) //DELETE THIS FUNCTION
+void Chromosome::AddGene(const Gene &x)
 {
 	Genes.push_back(x);
-};
-
-/*
-
-
-vector<string> Chromosome::FindGene(string n) //FIXME figure out what he wants us to return and how to do it
-{
-	string userSearch = n;
-
-	for (vector<string>::size_type i = 0; i < geneNameandTrait.size(); i++)
-
-	{
-		if (GetGeneName(i) == userSearch)
-		{
-			cout << "found it !!" << endl;
-		};
-	}
-	return geneNameandTrait;
-}
-
-
-
-bool Chromosome::ChromosomeClassTestBench()
-{
-	Chromosome testData;
-	vector<Allele> testVector;
-	string testName = "testName";
-	string testTrait = "testTrait";
-
-	testData.AddGene(testVector);
-	if (testData.genes.size() != 1)
-	{
-		cout << "Chrosome class resize vector error" << endl;
-		return false;
-	}
-
-	testData.AddNameandTrait(testName, testTrait);
-	if (testData.geneNameandTrait[0] != "testName,testTrait")
-	{
-		cout << "Chromosome class set Name/Trait error" << endl;
-		return false;
-	}
-
-	if (testName != testData.GetGeneName(0))
-	{
-		cout << "Chromosome class get name error" << endl;
-		return false;
-	}
-	if (testTrait != testData.GetGeneTrait(0))
-	{
-	}
-}
-*/
-//else { cout << "All chromosome class tests passed" << endl; }
-//return true;
-
-void Chromosome::InputFromFile(ifstream &ifs){
-	//FIXME DELETE THIS OR FIGURE OUT WHAT I WANT TO DO WITH IT
 };
 
 void Chromosome::OutputToFile(ofstream &ofs)
@@ -90,7 +26,7 @@ void Chromosome::OutputToFile(ofstream &ofs)
 	for (vector<Gene>::size_type i = 0; i < Genes.size(); i++)
 	{
 		tempGene = Genes.at(i);
-		tempGene.OutputToFile(ofs); //SHOULD THIS BE IN THE LOOP?
+		tempGene.OutputToFile(ofs);
 	}
 };
 
@@ -118,16 +54,9 @@ Chromosome Chromosome::operator+(Chromosome rhs)
 		b = rhs.Genes[i];
 	}
 
-	Gene newGene(a.GetGeneName(), a.GetGeneTrait(), a.doMeiosis(), b.doMeiosis()); //TEST THIS
-	cout
-		<< endl
-		<< "A new chromosome object has been" << endl
-		<< "created through meiosis." << endl
-		<< endl;
-	//newGene.SetNameandTrait(a.GetGeneName(), a.GetGeneTrait());
+	Gene newGene(a.GetGeneName(), a.GetGeneTrait(), a.doMeiosis(), b.doMeiosis());
 	Chromosome newChromosome;
-	newChromosome.AddGene(newGene); //TEST THIS TOO ESPECIALLY FOR GENE NAME
-	//a.doMeiosis().ReturnToMenu();
+	newChromosome.AddGene(newGene);
 
 	return newChromosome;
 };
@@ -136,8 +65,10 @@ bool Chromosome::ChromosomeClassTestBench()
 {
 	string testfile = "testing123ABC098.csv";
 	Chromosome testData;
-	Allele testAllele1;
-	Allele testAllele2;
+	Chromosome testData2;
+	Allele testAllele1("testvar1", "testtype1", "testseq1");
+	Allele testAllele2("testvar2", "testtype2", "testseq2");
+
 	string name;
 	string trait;
 	string type1;
@@ -159,13 +90,13 @@ bool Chromosome::ChromosomeClassTestBench()
 		cout << "Chromosome class add gene error" << endl;
 		return false;
 	}
-	//testGene1.SetNameandTrait("testname", "testtrait");
+	testData.Genes.resize(1);
 	tester_out.open(testfile);
 
 	testData.OutputToFile(tester_out);
 	tester_out.close();
 	tester_in.open(testfile);
-	for (int i = 1; i <= 2; i++) //check that 2 is right
+	for (int i = 1; i <= 1; i++)
 	{
 		getline(tester_in, name, ',');
 		getline(tester_in, trait, ',');
@@ -175,16 +106,29 @@ bool Chromosome::ChromosomeClassTestBench()
 		getline(tester_in, variant2, ',');
 		getline(tester_in, type2, ',');
 		getline(tester_in, sequence2, '\n');
-
-		if (name != "testname2")
-		{
-			cout << "PROBLEM";
-		}
 	}
-	//ADD ELSE
-	cout << "All chromosome class tests passed" << endl;
-	remove("testing123ABC098.csv");
 
-	Genes.resize(0); //MAKE SURE I NEED THIS
+	if (name != "testname1" || trait != "testtrait1" || type1 != "testtype1" || sequence1 != "testseq1" || variant1 != "testvar1" ||
+		type2 != "testtype2" || sequence2 != "testseq2" || variant2 != "testvar2")
+	{
+		cout << "Chromosome class output to file error" << endl;
+		return false;
+	}
+
+	Allele tempAllele = testGene1.doMeiosis();
+	if ((testAllele1.GetType() != tempAllele.GetType() && testAllele2.GetType() != tempAllele.GetType()) ||
+		(testAllele1.GetSequence() != tempAllele.GetSequence() && testAllele2.GetSequence() != tempAllele.GetSequence()) ||
+		(testAllele1.GetVariant() != tempAllele.GetVariant() && testAllele2.GetVariant() != tempAllele.GetVariant()))
+	{
+		cout << "Chromosome class doMeiosis error" << endl;
+		return false;
+	}
+
+	else
+	{
+		cout << "All chromosome class tests passed" << endl;
+		remove("testing123ABC098.csv");
+	}
+
 	return true;
 };

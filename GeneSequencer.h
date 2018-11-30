@@ -15,9 +15,10 @@ class GeneSequencer
 	Chromosome CreateChromosome();
 	Chromosome ImportChromosome(const string &fileName = "");
 	void ExportChromosome(Chromosome c, const string &filename = "");
-	void SequenceChromosomePair(Chromosome c);		  //DO THIS
-	Chromosome DoMeiosis(Chromosome x, Chromosome y); //AND THIS
-	bool PowerOnSelfTest();							  //AND THIS
+	void SequenceChromosomePair(Chromosome c);
+	Chromosome DoMeiosis(Chromosome x, Chromosome y);
+	bool PowerOnSelfTest();
+	void ReturnToMenu();
 
   private:
 	string name;
@@ -28,5 +29,4 @@ class GeneSequencer
 	string type2;
 	string sequence2;
 	string variant2;
-	vector<Chromosome> chromosomes;
 };

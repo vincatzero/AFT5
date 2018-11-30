@@ -14,7 +14,6 @@ class Allele
 	string GetSequence();
 
 	string GetSequence(const int &x);
-	void ReturnToMenu();
 	void SetThreeVariables(string &variant, string &type, string &sequence);
 	void OutputToFile(ofstream &ofs);
 	void AnalyzeGenotype();

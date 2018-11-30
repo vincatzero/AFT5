@@ -1,7 +1,6 @@
-/*	Project:    NAME OF PROJECT GOES HERE
-	Name:       YOUR NAME GOES HERE
-    Partner:    PARTNER'S NAME IF ANY
-    Class:      example: CSC 1810 - Section 1
+/*	Project:    Gene Sequencer
+	Name:       Omar Cataldo
+    Class:      CSC 1810 - Section 3
 */
 
 #include <iostream>
@@ -30,24 +29,20 @@ int main(int argc, char *argv[])
 
 void runMenu()
 {
-	Allele allele;
-	Gene newGene; //DELETE THIS
 
 	GeneSequencer GeneSequencers;
 	string UserOption;
 	string userFile;
 	Chromosome newChromosome;
 	Chromosome newChromosome2;
-	vector<string> testGene;
 	int counter;
 	while (UserOption != "6")
 	{
 
 		while (counter < 1)
 
-		//FIXED? DOES IT EVERY TIME
 		{
-			//GeneSequencers.PowerOnSelfTest();
+			GeneSequencers.PowerOnSelfTest();
 			counter = 1;
 		}
 
@@ -75,10 +70,7 @@ void runMenu()
 		switch (userChoice)
 		{
 		case 1:
-			//allele.alleleClassTestBench();
-			//newGene.GeneClassTestBench();
-			//newChromosome = GeneSequencers.CreateChromosome();
-			newChromosome.ChromosomeClassTestBench();
+			newChromosome = GeneSequencers.CreateChromosome();
 			break;
 		case 2:
 			GeneSequencers.SequenceChromosomePair(newChromosome);
@@ -87,29 +79,19 @@ void runMenu()
 			cout << "Enter the name of the file you would like to export to: " << endl;
 			getline(cin, userFile);
 			GeneSequencers.ExportChromosome(newChromosome, userFile);
-
 			break;
 		case 4:
 			cout << "Enter the file would you like to import from:" << endl;
 			getline(cin, userFile);
 			newChromosome = GeneSequencers.ImportChromosome(userFile);
 			break;
-
 		case 5:
 			cout << "Enter the information for the second chromosome" << endl
 				 << endl;
 			newChromosome2 = GeneSequencers.CreateChromosome();
 			newChromosome = GeneSequencers.DoMeiosis(newChromosome, newChromosome2);
-			//newChromosome = GeneSequencers.DoMeiosis(newChromosome,newChromosome2);
-
-			/*
-			cout << "Enter the gene name you would like to search for: " << endl;
-			getline(cin, userFile);
-			testGene = newChromosome.FindGene(userFile); */
-
 			break;
 		case 6:
-
 			break;
 		}
 	}

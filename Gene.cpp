@@ -58,7 +58,6 @@ void Gene::AnalyzeGenotype()
 
 	b = this->B;
 	b.AnalyzeGenotype();
-	//b.ReturnToMenu();
 };
 
 Allele Gene::doMeiosis()
@@ -123,8 +122,6 @@ bool Gene::GeneClassTestBench()
 		return false;
 	}
 
-	//test1, test2, testvariant1, testtype1, testseq1, testvariant2, testtype2, testseq2
-
 	for (int i = 1; i <= 1; i++)
 	{
 		getline(tester_in, in_out_1, ',');
@@ -137,13 +134,12 @@ bool Gene::GeneClassTestBench()
 		getline(tester_in, in_out_8, '\n');
 	}
 
-	if ((in_out_1 != "test1") || (in_out_2 != "test2") || (in_out_3 != "testvariant1") || (in_out_4 != "dominant") || (in_out_5 != "testseq1") || (in_out_6 != "testvariant2") || (in_out_7 != "testtype2") || (in_out_8 != "testseq2"))
+	if ((in_out_1 != "test1") || (in_out_2 != "test2") || (in_out_3 != "testvariant1") || (in_out_4 != "dominant") ||
+		(in_out_5 != "testseq1") || (in_out_6 != "testvariant2") || (in_out_7 != "testtype2") || (in_out_8 != "testseq2"))
 	{
 		cout << "Gene class write to file error " << endl;
 		return false;
 	}
-
-	// testData.AnalyzeGenotype();  TEST ANALYZE AFTER I FIGURE OUT IF I'M MOVING OUT TO GENESEQUENCER
 
 	testAllele1 = testData.doMeiosis();
 	if ((testAllele1.GetVariant() != "testvariant1" && testAllele1.GetVariant() != "testvariant2") ||

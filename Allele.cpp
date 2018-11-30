@@ -38,13 +38,6 @@ string Allele::GetVariant()
 	return alleleVariant;
 };
 
-void Allele::ReturnToMenu()
-{
-	char c;
-	cout << "Press enter to return to menu:" << endl;
-	cin.get(c);
-};
-
 void Allele::SetThreeVariables(string &variant, string &type, string &sequence)
 {
 	alleleVariant = variant;
@@ -89,7 +82,7 @@ bool Allele::alleleClassTestBench()
 		getline(tester_in, in_out_3, ',');
 	}
 
-	if ((in_out_1 != "test1") || (in_out_2 != "test2") || (in_out_3 != "test3")) // || (in_out_4 != "test2") || (in_out_5 != "test2") || (in_out_6 != "test2"))
+	if ((in_out_1 != "test1") || (in_out_2 != "test2") || (in_out_3 != "test3"))
 	{
 		cout << "Allele class write to file error " << endl;
 		return false;

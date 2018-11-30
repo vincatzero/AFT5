@@ -10,7 +10,6 @@ class Chromosome
 {
   public:
 	Chromosome();
-	//Chromosome(const Gene &x);
 
 	void AnalyzeGenotype();
 
@@ -18,8 +17,7 @@ class Chromosome
 
 	void OutputToFile(ofstream &ofs);
 
-	void InputFromFile(ifstream &ifs); //DO SOMETHING WITH THIS
-	vector<string> FindGene(string n); //AND THIS
+	void InputFromFile(ifstream &ifs);
 	Chromosome operator+(Chromosome rhs);
 
 	bool ChromosomeClassTestBench();
